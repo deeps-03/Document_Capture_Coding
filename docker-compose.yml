@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # Development environment
+  dev:
+    build:
+      context: .
+      target: development
+    ports:
+      - "1234:1234"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - VITE_PORT=1234
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:1234"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    command: npm run dev
+
+  # Production environment
+  prod:
+    build:
+      context: .
+      target: production
+    ports:
+      - "1234:1234"
+    environment:
+      - NODE_ENV=production
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:1234"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

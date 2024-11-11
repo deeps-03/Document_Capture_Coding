@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-dark: #000000;
+  --color-dark-alt: #121212;
+  --color-mid: #1a1a1a;
+  --color-accent: #1a1a1a;
+  --color-accent-dark: #0a0a0a;
+  --color-accent-light: #2a2a2a;
+}
+
+body {
+  background-color: var(--color-dark);
+  color: #ececf1;
+}
+
+.tooltip {
+  @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible z-50;
+}
+
+.notification {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
